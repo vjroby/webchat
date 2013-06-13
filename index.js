@@ -21,6 +21,10 @@ io.sockets.on('connection', function (socket) {
 
         io.sockets.emit('message', data);
     });
-})
+    socket.on('user', function (data) {
+
+        io.sockets.emit('user', data);
+    });
+});
 
 console.log("Listening on port " + port);

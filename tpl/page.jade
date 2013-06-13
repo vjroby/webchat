@@ -2,10 +2,14 @@
 html
     head
         title= "Real time web chat"
+        script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js')
         script(src='/chat.js')
         script(src='/socket.io/socket.io.js')
     body
-        #content(style='width: 500px; height: 300px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;')
+        //#user(style='width: 70px; position: relative;') Users
+        #users(style='width: 70px; height: 300px; margin: 0 0 20px 0; border: solid 1px #999;position: relative; display: inline-block;')
+
+        #content(style='width: 500px; height: 300px; margin: 0 0 20px 10px; border: solid 1px #999; overflow-y: scroll;display: inline-block;')
        .controls
            | Name:
            input#name(style='width:350px;')

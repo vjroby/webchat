@@ -6,6 +6,7 @@ window.onload = function() {
     var field = document.getElementById("field");
     var sendButton = document.getElementById("send");
     var content = document.getElementById("content");
+    var users = document.getElementById("users");
     var name = document.getElementById("name");
 
     socket.on('message', function (data) {
@@ -22,7 +23,22 @@ window.onload = function() {
         }
     });
 
-    sendButton.onclick = function() {
+    socket.on('user',function (data) {
+
+        if(data) {
+
+            users.innerHTML = data;
+        } else {
+            console.log("There is a problem:", data);
+        }
+    });
+
+    updateusers = function(data) {
+        socket.emit('user', data);
+
+    }
+
+    sendButton.onclick = sendMessage = function() {
         if(name.value == "") {
             alert("Please type your name!");
         } else {
@@ -31,5 +47,18 @@ window.onload = function() {
             field.value = "";
         }
     };
+};
 
-}
+$(document).ready(function() {
+    $("#field").keyup(function(e) {
+        if(e.keyCode == 13) {
+            sendMessage();
+        }
+    });
+    $("input[id=name]").change( function(){
+        updateusers($(this).val());
+    });
+
+
+});
+
